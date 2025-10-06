@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echocardiogram Report</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="styles.css">
+ </head>
+<body>
+    
+    <h2 class="MainText">LVM REPORT</h2>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <div class="input">
+        {{form.as_p}}
+        </div>
+        {% if LVM %}
+        <button class="btn" type="submit">Re-Calculate</button>
+        <button class="btn" type="submit" name="download">Download Result</button>
+        
+         {% else %}
+        <button class="btn" type="submit">Calculate</button>
+        {% endif%} 
+    </form>
+    {% if LVM %}
+    <hr>
+    <div class="mc">
+     <p class="report_header">Echocardiogram Report<br><br>
+        <p>Left Ventricular Mass Report<br>
+        <p> Name : {{PName}}</p>
+        <p> Gender(Biological) : {{GEN}}</p>
+        <p>Date: {{dt}}</p>
+        <p> Results:<br>
+                                   (i)Left Ventricular Mass(LVM):{{LVM}}<br>
+                                   (ii)LVM Index : {{LVMI}}<br>
+                                   (iii)Body Surface Area(BSA):{{BSA}}</p><br>
+                                   (iv)Reference Status : {{RS}}<br>
+        <b>Aditya Hospital</b> <br>
+        {{dt}}
+    {% endif %}
+    </p>
+    </div>
+</body>
+</html>
